@@ -1,0 +1,35 @@
+<odoo>
+
+    <record id="project_task_inherit_view_task_form2" model="ir.ui.view">
+        <field name="name">project.task.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='name']" position="before">-->
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <group>
+                    <group>
+                    <field name="mom_id" calss="" attrs="{'invisible': [('mom_id', '=', False)], 'readonly': 1}"/>
+
+                    </group>
+                </group>
+
+            </xpath>
+            <xpath expr="//i[hasclass('o_project_task_project_field')]" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('mom_id', '!=', False),('project_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[hasclass('o_project_task_project_field')]" position="attributes">
+<!--            <xpath expr="//field[@name='project_id']" position="attributes">-->
+                <attribute name="attrs">{'invisible': [('mom_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//label[hasclass('oe_read_only')]" position="attributes">
+<!--            <xpath expr="//field[@name='project_id']" position="attributes">-->
+                <attribute name="attrs">{'invisible': [('mom_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='project_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('mom_id', '!=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

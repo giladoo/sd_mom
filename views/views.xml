@@ -1,0 +1,92 @@
+<odoo>
+    <data>
+
+        <!-- ==================================================  sd_mom.sd_mom ====================-->
+
+        <record model="ir.ui.view" id="sd_mom_list">
+            <field name="name">sd_mom List</field>
+            <field name="model">sd_mom.moms</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sd_mom_form">
+            <field name="name">sd_mom FORM</field>
+            <field name="model">sd_mom.moms</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+
+                            <field name="company_id" invisible="1"/>
+                            <field name="name"/>
+                            <field name="mom_id" invisible="1"/>
+                            <field name="tasks" widget="one2many">
+<!--                                <tree editable="bottom">-->
+                                <tree>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="project_id" invisible="1"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="user_ids" widget="many2many_avatar_user"/>
+                                    <field name="activity_ids" widget="kanban_activity"/>
+                                    <field name="date_deadline" />
+<!--                                    <field name="date_deadline_j" />-->
+                                    <field name="stage_id"/>
+
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <!-- ==================================================  Search ====================-->
+
+        <record model="ir.ui.view" id="sd_mom_list_search">
+            <field name="name">sd_mom</field>
+            <field name="model">sd_mom.moms</field>
+            <field name="arch" type="xml">
+                <search string="Dealers">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- ==================================================  Action Window ====================-->
+
+
+        <record model="ir.actions.act_window" id="action_window_mom_data">
+            <field name="name">MOM</field>
+            <field name="res_model">sd_mom.moms</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+      <record model="ir.actions.client" id="action_data_dashboard">
+            <field name="name">Data Dashboard</field>
+            <field name="res_model">sd_mom.moms</field>
+            <field name="tag">sd_mom_data_dashboard_tag</field>
+        </record>
+        <!-- ==================================================  Menu ====================-->
+
+
+        <menuitem name="MOM"
+                  sequence="0"
+                  id="root_menu"
+                  action="action_data_dashboard"/>
+
+        <menuitem name="MOM List"
+                  sequence="0"
+                  id="mom_data"
+                  parent="root_menu"
+                  action="action_window_mom_data"/>
+
+    </data>
+</odoo>
