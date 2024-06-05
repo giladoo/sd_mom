@@ -7,8 +7,10 @@
             <field name="name">sd_mom List</field>
             <field name="model">sd_mom.moms</field>
             <field name="arch" type="xml">
-                <tree >
+                <tree>
                     <field name="name"/>
+                    <field name="description" />
+
                 </tree>
             </field>
         </record>
@@ -18,33 +20,66 @@
             <field name="model">sd_mom.moms</field>
             <field name="arch" type="xml">
                 <form>
-                    <sheet>
-                        <group>
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
+                    </header>
+                        <field name="company_id" invisible="1"/>
+                        <field name="mom_id" invisible="1"/>
+                        <div class="border col-12 col-md-10 shadow mx-auto  p-4 my-4 rounded" style="max-width: 1100px;">
+                                    <group>
+                                            <field name="name" string="HEADER"/>
+                                        <group>
+                                        </group>
+                                        <group>
+                                            <field name="mom_no" string="MOM No."/>
+                                            <field name="mom_date" string="MOM Date"/>
 
-                            <field name="company_id" invisible="1"/>
-                            <field name="name"/>
-                            <field name="mom_id" invisible="1"/>
-                            <field name="tasks" widget="one2many">
-<!--                                <tree editable="bottom">-->
-                                <tree>
-                                    <field name="company_id" invisible="1"/>
-                                    <field name="project_id" invisible="1"/>
-                                    <field name="sequence" widget="handle"/>
-                                    <field name="name"/>
-                                    <field name="user_ids" widget="many2many_avatar_user"/>
-                                    <field name="activity_ids" widget="kanban_activity"/>
-                                    <field name="date_deadline" />
-<!--                                    <field name="date_deadline_j" />-->
-                                    <field name="stage_id"/>
+                                        </group>
+                                    </group>
+                            <div class="border px-4 my-3"></div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="o_form_label text-center">Header 1</div>
+                                            <field name="description" widget="html" string="HEADER" nolable="1"/>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="o_form_label text-center">Header 2</div>
+                                            <field name="description_2" widget="html" string="HEADER" nolable="1"/>
+                                        </div>
+                                    </div>
+                        </div>
+                    <div class="border shadow rounded p-4 mx-2 my-5">
 
-                                </tree>
-                            </field>
-                        </group>
-                    </sheet>
+                        <field name="tasks" widget="one2many">
+                            <tree editable="bottom">
+                                <field name="company_id" invisible="1"/>
+                                <field name="project_id" invisible="1"/>
+                                <field name="sequence" widget="handle"/>
+                                <field name="mom_line_no" readonly="1" width="30px"/>
+<!--                                <field name="id" width="20px"/>-->
+                                <field name="name" width="200px"/>
+                                <field name="mom_detail" width="600px"/>
+
+                                <field name="user_ids" widget="many2many_avatar_user"/>
+<!--                                <field name="activity_ids" widget="kanban_activity"/>-->
+                                <field name="date_deadline"/>
+                                <field name="stage_id" attrs="{'readonly': [('id', '=', False)]}"/>
+<!--                                <field name="stage_id"/>-->
+                                <button name="action_open_task" type="object" title="View Task" string="View Task"
+                                        class="btn btn-link pull-right"/>
+
+                            </tree>
+                        </field>
+                            </div>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" options="{'post_refresh':True}" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
-
 
 
         <!-- ==================================================  Search ====================-->
@@ -69,7 +104,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-      <record model="ir.actions.client" id="action_data_dashboard">
+        <record model="ir.actions.client" id="action_data_dashboard">
             <field name="name">Data Dashboard</field>
             <field name="res_model">sd_mom.moms</field>
             <field name="tag">sd_mom_data_dashboard_tag</field>

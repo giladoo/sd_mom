@@ -29,9 +29,16 @@ export class SdMomDataDashboard extends Component {
                 value: '',
                 status: session.name
             },
-            })
+            open_mom: {
+                value: 0
+            }
+        })
 
         onWillStart(async ()=>{
+            await this._openMom()
+                .then(data => {
+                    this.state.open_mom.value = data.value
+                })
 
         })
         onMounted(()=> {
@@ -40,6 +47,17 @@ export class SdMomDataDashboard extends Component {
         onWillUnmount(function(){
 
         })
+        this._openMom = this._openMom.bind(this);
+
+    }
+    async _openMom(){
+//        let dateFormat = session.user_context.lang == 'fa_IR' ? "jYYYY/jMM/jDD" : "YYYY-MM-DD"
+        const moms = await this.orm.searchRead("sd_mom.moms", [['active', '=', 'True']],['name',])
+        console.log('moms:', moms)
+//        this.state.spgr.status = moment(spgr[0].spgr_date).format(dateFormat);
+//        this.state.spgr.value = spgr[0].spgr;
+        let results = {'value': moms.length, 'status': 'open'}
+        return results
     }
 }
 

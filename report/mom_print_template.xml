@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="data_header">
+            <div class="header ">
+                <div t-att-style="'font-family: IRANSans !important;' if lang == 'fa_IR' else ''">
+                <div class="row pt-3 text-center">
+                    <div class="col-8 h5" t-esc="o_data.name"></div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-6">MOM No.</div>
+                            <div class="col-6 h6" t-esc="o_data.mom_no" style="font-family: auto !important"></div>
+                        </div>
+                        <div class="row iransans_font1" >
+                            <div class="col-6">MOM Date</div>
+                            <div class="col-6 h6" t-esc="o_data.mom_date"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-dark px-5"></div>
+            </div>
+            </div>
+        </template>
+
+        <template id="body">
+<!--            <div class="h3" t-esc="o_data.name"></div>-->
+<!--            <t t-set="descriptions" t-value="o_data.description.split('\n')"/>-->
+<!--            <t t-foreach="o_data.description.split('\n')" t-as="description_line">-->
+<!--                <div class="border" t-esc="description_line"></div>-->
+<!--            </t>-->
+            <div class="row">
+                <div class="col-6" t-esc="o_data.description"></div>
+                <div class="col-6" t-esc="o_data.description_2"></div>
+
+            </div>
+
+            <table class="table table-bordered" style="font-size: 0.7rem;">
+                <thead>
+                    <tr class="text-center">
+                        <th style="width: 3%">No</th>
+                        <th style="width: 80%">Activities</th>
+                        <th style="width: 10%">Date</th>
+                        <th style="width: 7%">State</th>
+                        <!--                            <th style="width: 10%">5</th>-->
+                    </tr>
+                    <tr class="border border-danger"></tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="o_data.tasks" t-as="task">
+                        <td class="text-center" t-esc="task.mom_line_no or ''"></td>
+                        <td>
+                            <div class="h6 font-weight-bold" t-esc="task.name or ''"></div>
+                            <div class="small" t-esc="task.mom_detail or ''"></div>
+                        </td>
+                        <td class="text-center" t-esc="task.date_deadline or ''"></td>
+                        <td class="text-center" t-esc="task.stage_id or ''"></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="height: 150px;">
+                        <th colspan="5">Sing:</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </template>
+
+        <template id="footer">
+            <div class="footer p-0" t-att-style="'font-family: IRANSans !important;' if lang == 'fa_IR' else ''">
+                <div class="text-center x-small p-0">
+                    <span class="">Page </span>
+                    <span class="page"></span>
+                    of
+                    <span class="topage"></span>
+                </div>
+            </div>
+        </template>
+
+        <template id="mom_print">
+            <div class="container">
+                <div class="page">
+                    <t t-call="sd_mom.data_header" t-lang="lang"/>
+                    <t t-call="sd_mom.body" t-lang="lang"/>
+                    <t t-call="sd_mom.footer" t-lang="lang"/>
+                </div>
+            </div>
+        </template>
+
+        <!-- ############################  GENERAL   ######################################### -->
+
+        <template id="mom_print_template">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.env.context.get('lang')"/>
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <t t-call="web.basic_layout" >
+                    <t t-set="o_data" t-value="data[o.id]"/>
+
+                    <t t-call="sd_mom.mom_print" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

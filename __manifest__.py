@@ -29,6 +29,8 @@
         # 'views/control_panel.xml',
         'views/project.xml',
         'views/views.xml',
+        'report/mom_print.xml',
+        'report/mom_print_template.xml',
         # 'views/templates.xml',
         # 'views/hr_employee_views.xml',
         # 'data/home_data.xml'
