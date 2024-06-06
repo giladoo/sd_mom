@@ -47,6 +47,12 @@
         ],
         'web.assets_common': [
             # 'sd_mom/static/src/xml/control_panel.xml',
+            'sd_mom/static/src/css/styles.css',
+
+        ],
+        'web.report_assets_common': [
+            # 'sd_mom/static/src/xml/control_panel.xml',
+            'sd_mom/static/src/css/styles.css',
 
         ],
         'web.assets_qweb': [
@@ -59,7 +65,7 @@
 
             'sd_mom/static/src/components/**/*.js',
             # 'sd_mom/static/src/components/**/*.scss',
-            # 'sd_mom/static/src/css/my-style.scss',
+            'sd_mom/static/src/css/styles.css',
             # 'sd_mom/static/src/web/**/*.scss',
             # 'sd_mom/static/src/web/**/*.js',
 

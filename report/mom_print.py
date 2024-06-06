@@ -38,6 +38,11 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
         data = dict({rec.id: DictToObject(**{'name': rec.name,
                                              'description': rec.description,
                                              'description_2': rec.description_2,
+                                             'is_attendees': True if len(re.sub(CLEANR, "", rec.list_1)) > 0 or len(re.sub(CLEANR, "", rec.list_1)) > 0 else False ,
+                                             'list_1': rec.list_1,
+                                             'list_2': rec.list_2,
+                                             'is_agenda': True if len(re.sub(CLEANR, "", rec.agenda)) > 0 else False,
+                                             'agenda': rec.agenda,
                                              'mom_no': rec.mom_no,
                                              'mom_date': self.date_converter(rec.mom_date, calendar)['date'],
                                              'tasks': [DictToObject(**{'mom_line_no': task_rec.mom_line_no,
@@ -47,11 +52,11 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                                                                        'stage_id': task_rec.stage_id.name,
                                                                        }) for task_rec in rec.tasks]})
                      for rec in docs})
-        for rec_id, rec_value in data.items():
 
-            print(f'==============\n {rec_id}   {rec_value}')
-            for task in rec_value.tasks:
-                print(f'           {task.mom_line_no} {task.name} {task.mom_detail} [{re.sub(CLEANR, "", task.mom_detail)}] len detail:{len(task.mom_detail)} ')
+        # for rec_id, rec_value in data.items():
+            # print(f'==============\n {rec_id}   {rec_value}')
+            # for task in rec_value.tasks:
+            #     print(f'           {task.mom_line_no} {task.name} {task.mom_detail} [{re.sub(CLEANR, "", task.mom_detail)}] len detail:{len(task.mom_detail)} ')
 
 
         return {

@@ -21,8 +21,12 @@ class SdMomMoms(models.Model):
     mom_date = fields.Date(required=True, tracking=True,
                              default=lambda self: datetime.now(pytz.timezone(self.env.context.get('tz', 'Asia/Tehran'))))
     active = fields.Boolean(default=True)
+    location = fields.Char()
     description = fields.Html()
+    agenda = fields.Html()
     description_2 = fields.Html()
+    list_1 = fields.Html()
+    list_2 = fields.Html()
     state = fields.Selection([('ongoing', 'Ongoing'),
                               ('stopped', 'Stopped'),
                               ('canceled', 'Canceled'),

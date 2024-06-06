@@ -28,13 +28,20 @@
 <!--            <t t-foreach="o_data.description.split('\n')" t-as="description_line">-->
 <!--                <div class="border" t-esc="description_line"></div>-->
 <!--            </t>-->
-            <div class="row">
-                <div class="col-6" t-esc="o_data.description"></div>
-                <div class="col-6" t-esc="o_data.description_2"></div>
-
+            <div t-if="o_data.is_attendees" class="my-3 mx-0">
+                <div class="col" >Attendees</div>
+                <div class="row border border-dark rounded mx-0 py-2">
+                    <div class="col-6" t-esc="o_data.list_1"></div>
+                    <div class="col-6" t-esc="o_data.list_2"></div>
+                </div>
+            </div>
+            <div t-if="o_data.is_agenda" class="my-3 mx-0">
+                <div class="col">Agenda</div>
+                <div class="col-12 border border-dark rounded py-2" t-raw="o_data.agenda"></div>
             </div>
 
-            <table class="table table-bordered" style="font-size: 0.7rem;">
+            <div class="col">Activities</div>
+            <table class="table table-bordered1 mom_table" style="font-size: 0.7rem;">
                 <thead>
                     <tr class="text-center">
                         <th style="width: 3%">No</th>

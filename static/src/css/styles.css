@@ -1,0 +1,15 @@
+.mom_table thead tr th {
+    border: 1px solid #727272 !important;
+}
+
+.mom_table tbody tr{
+    border: 1px solid #727272 !important;
+}
+.mom_table tbody tr td{
+    border-top: 1px solid green !important;
+    border: 1px solid #727272 !important;
+}
+
+.mom_table tfoot tr th{
+    border: 1px dashed #727272 !important;
+}
