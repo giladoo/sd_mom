@@ -61,23 +61,22 @@ class SdMomMoms(models.Model):
                 line_no += 1
             # print(f'---------------\n {new_tasks}')
             vals["tasks"] = new_tasks
-
-
-
-
-            # if len(tasks_sequence) > 0:
-            #     tasks_list = list([rec[1] for rec in vals.get('tasks')])
-            #     tasks = self.env['project.task'].browse(tasks_list)
-            #     line_no = 1
-            #     for task in tasks:
-            #         task.write({'mom_line_no': line_no})
-            #         line_no += 1
-
         return super().write(vals)
 
     @api.model
     def create(self, vals):
-        # print(f'===== CREATE =====\n {vals}\n')
+        new_tasks = []
+        line_no = 1
+        for task in vals.get("tasks"):
+            # print(f'===== CREATE =====\n {task}')
+            new_task = task
+            new_task[2]['mom_line_no'] = line_no
+            new_task[2]['sequence'] = line_no
+            new_tasks.append(new_task)
+            line_no += 1
+            # print(f'\n {new_task}\n')
+
+        vals["tasks"] = new_tasks
         return super().create(vals)
 
 
