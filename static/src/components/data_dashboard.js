@@ -26,18 +26,23 @@ export class SdMomDataDashboard extends Component {
                 name: _t('Minutes Of Meeting'),
             },
             username: {
-                value: '',
-                status: session.name
+                name: session.name,
+                status: moment().locale('fa').format('jYYYY/jMM/jDD'),
             },
-            open_mom: {
-                value: 0
-            }
+            ongoing_mom: {
+                value: 0,
+            },
+            all_mom: {
+                value: 0,
+            },
         })
 
         onWillStart(async ()=>{
-            await this._openMom()
+            await this._getUpdateMom()
                 .then(data => {
-                    this.state.open_mom.value = data.value
+                    console.log('_ongoingMom', data)
+                    this.state.all_mom.value = data.all.value
+                    this.state.ongoing_mom.value = data.ongoing.value
                 })
 
         })
@@ -47,18 +52,45 @@ export class SdMomDataDashboard extends Component {
         onWillUnmount(function(){
 
         })
-        this._openMom = this._openMom.bind(this);
+        this._getUpdateMom = this._getUpdateMom.bind(this);
+        this.viewMoms = this.viewMoms.bind(this);
 
     }
-    async _openMom(){
+    async _getUpdateMom(){
 //        let dateFormat = session.user_context.lang == 'fa_IR' ? "jYYYY/jMM/jDD" : "YYYY-MM-DD"
-        const moms = await this.orm.searchRead("sd_mom.moms", [['active', '=', 'True']],['name',])
-        console.log('moms:', moms)
-//        this.state.spgr.status = moment(spgr[0].spgr_date).format(dateFormat);
-//        this.state.spgr.value = spgr[0].spgr;
-        let results = {'value': moms.length, 'status': 'open'}
+//        const moms = await this.orm.searchRead("sd_mom.moms", [['state', 'in', ['ongoing', 'stopped']]],['name',])
+        const moms = await this.orm.searchRead("sd_mom.moms", [],['state',])
+//        console.log('_getUpdateMom', moms)
+        let ongoing = moms.filter(r => ['ongoing', 'stopped'].includes(r.state))
+
+        let results = {'all':{'value': moms.length,}, 'ongoing':{'value': ongoing.length,}, }
         return results
     }
+        viewMoms(mom_state='all'){
+//        console.log('viewMoms', mom_state )
+        let domain = []
+        let reportName = 'All MOMs'
+        if(mom_state == 'ongoing'){
+            domain = [['state',  'in', ['ongoing', 'stopped']]]
+            reportName = 'Ongoing MOMs'
+        }
+
+        this.actionService.doAction({
+            name: reportName,
+            res_model: "sd_mom.moms",
+//            res_id: this.actionId,
+            views: [[false, "list"], [false, "form"]],
+            type: "ir.actions.act_window",
+            view_mode: "list",
+            domain: domain,
+//            context: {'search_default_meter_no_group': 1},
+            target: "current",
+        });
+    }
+
+
+
+
 }
 
 SdMomDataDashboard.template = "sd_mom_data_dashboard_template"

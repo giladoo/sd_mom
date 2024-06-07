@@ -2,20 +2,30 @@
 <odoo>
     <data>
         <template id="data_header">
-            <div class="header ">
+            <div class="header " >
                 <div t-att-style="'font-family: IRANSans !important;' if lang == 'fa_IR' else ''">
-                <div class="row pt-3 text-center">
-                    <div class="col-8 h5" t-esc="o_data.name"></div>
-                    <div class="col-4">
-                        <div class="row">
-                            <div class="col-6">MOM No.</div>
-                            <div class="col-6 h6" t-esc="o_data.mom_no" style="font-family: auto !important"></div>
+                <div class="row  pt-3 mx-3 text-center" >
+                    <div class="col-1  mx-0 px-0 mb-2" >
+                            <img style="display:block;"
+                                 t-att-src="'/report/barcode/?type=QR&amp;value=%s&amp;width=%s&amp;height=%s' % (quote_plus(o_data.mom_no), 70, 70)"
+                                 alt="QR Code"/>
+                       </div>
+                    <div class="col-8 h6" t-esc="o_data.name" style="display: -webkit-box; -webkit-box-pack: center; -webkit-box-orient: vertical;"></div>
+                    <div class="col-3 px-0 small" style="display: -webkit-box; -webkit-box-pack: center; -webkit-box-orient: vertical;">
+<!--                        <div class="col mx-0 px-0 mb-2" >-->
+<!--                            <img class=" mr-5 px-0 " t-att-src="'/report/barcode/Code128/'+o_data.mom_no"-->
+<!--                                style="width:300px; height:25px" t-att-alt="o_data.mom_no"/>-->
+<!--                       </div>-->
+                        <div class="row mx-0 mb-1">
+                            <div class="col-6 text-right px-0">MOM No.</div>
+                            <div class="col-6 px-0" t-esc="o_data.mom_no" style="font-family: auto !important"></div>
                         </div>
-                        <div class="row iransans_font1" >
-                            <div class="col-6">MOM Date</div>
-                            <div class="col-6 h6" t-esc="o_data.mom_date"></div>
+                        <div class="row mx-0" >
+                            <div class="col-6 text-right px-0">MOM Date</div>
+                            <div class="col-6 px-0" t-esc="o_data.mom_date"></div>
                         </div>
                     </div>
+
                 </div>
                 <div class="border border-dark px-5"></div>
             </div>
@@ -23,24 +33,19 @@
         </template>
 
         <template id="body">
-<!--            <div class="h3" t-esc="o_data.name"></div>-->
-<!--            <t t-set="descriptions" t-value="o_data.description.split('\n')"/>-->
-<!--            <t t-foreach="o_data.description.split('\n')" t-as="description_line">-->
-<!--                <div class="border" t-esc="description_line"></div>-->
-<!--            </t>-->
             <div t-if="o_data.is_attendees" class="my-3 mx-0">
-                <div class="col" >Attendees</div>
+                <div class="col font-weight-bold h5" >Attendees</div>
                 <div class="row border border-dark rounded mx-0 py-2">
                     <div class="col-6" t-esc="o_data.list_1"></div>
                     <div class="col-6" t-esc="o_data.list_2"></div>
                 </div>
             </div>
             <div t-if="o_data.is_agenda" class="my-3 mx-0">
-                <div class="col">Agenda</div>
+                <div class="col font-weight-bold h5">Agenda</div>
                 <div class="col-12 border border-dark rounded py-2" t-raw="o_data.agenda"></div>
             </div>
 
-            <div class="col">Activities</div>
+            <div class="col font-weight-bold h5">Activities</div>
             <table class="table table-bordered1 mom_table" style="font-size: 0.7rem;">
                 <thead>
                     <tr class="text-center">

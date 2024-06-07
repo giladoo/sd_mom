@@ -66,10 +66,9 @@
                             </div>
                         </div>
                         <div style="min-height: 100px;">
-                            <div class="">
+
                                 <div class="o_form_label">Agenda</div>
-                                <field name="agenda" class="border rounded h-100" widget="html" nolable="1" height="100px"/>
-                            </div>
+                                <field name="agenda" class="border rounded h-100" widget="html" nolable="1"/>
                         </div>
                     </div>
                     <div class="border shadow rounded p-4 mx-2 my-5">

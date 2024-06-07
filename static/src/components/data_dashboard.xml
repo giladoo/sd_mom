@@ -7,8 +7,10 @@
                         aa2
                     </div>
                     <div class="row">
-                        <SdMomDataCards name="''" status="state.username.status"/>
-                        <SdMomDataCards name="'Open MOM'" status="state.open_mom.value"/>
+                        <SdMomDataCards name="state.username.name" status="state.username.status"/>
+                        <SdMomDataCards onClick="()=>viewMoms('all')" name="'All MOMs'" status="state.all_mom.value"/>
+                        <SdMomDataCards onClick="()=>viewMoms('ongoing')" name="'Ongoing MOMs'" status="state.ongoing_mom.value"/>
+<!--                        <SdMomDataCards onClick="()=>viewOngoingMoms(0)"   status="state.this_day_requests_count.status" value="state.this_day_requests_count.value"  />-->
                     </div>
                 </div>
             </div>

@@ -64,7 +64,7 @@
         'web.assets_backend': [
 
             'sd_mom/static/src/components/**/*.js',
-            # 'sd_mom/static/src/components/**/*.scss',
+            'sd_mom/static/src/components/**/*.scss',
             'sd_mom/static/src/css/styles.css',
             # 'sd_mom/static/src/web/**/*.scss',
             # 'sd_mom/static/src/web/**/*.js',
