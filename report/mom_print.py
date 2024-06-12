@@ -36,8 +36,11 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
         date_time1 = self.date_converter(date_time, context.get('lang'))
         docs = self.env['sd_mom.moms'].browse(docids)
         data = dict({rec.id: DictToObject(**{'name': rec.name,
+                                             'project_name': rec.project_id.name,
                                              'description': rec.description,
                                              'description_2': rec.description_2,
+                                             'logo_block_1': list([partner.id for partner in rec.logo_1 ]),
+                                             'logo_block_2': list([partner.id for partner in rec.logo_2 ]),
                                              'is_attendees': True if len(re.sub(CLEANR, "", rec.list_1)) > 0 or len(re.sub(CLEANR, "", rec.list_1)) > 0 else False ,
                                              'list_1': rec.list_1,
                                              'list_2': rec.list_2,

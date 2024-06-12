@@ -9,24 +9,50 @@ class SdMomMoms(models.Model):
     _description = 'sd_mom.moms'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+
+
+    def _location_domain(self):
+        domain = []
+        partners = self.env['res.partner'].search([])
+        partners = list([rec.id for rec in partners if rec.company_type == 'company'])
+        if partners:
+            domain = [('id', 'in', partners)]
+        return domain
+
     def _default_project_id(self):
-        project_id = self.env['project.project'].sudo().search([('name', '=', 'MOM')])
+        project_id = self.env['project.project']
 
         # stage_id = self.sudo().stage_find(project_id.id, [('fold', '=', False), ('is_closed', '=', False)])
         print(f'============  \n {project_id}  \n {self.env.context}\n')
         return project_id
-
+    logo_1 = fields.Many2many('res.partner', 'res_partner_sd_mom_moms_logo_1', domain=lambda self: self._location_domain())
+    logo_2 = fields.Many2many('res.partner', 'res_partner_sd_mom_moms_logo_2', domain=lambda self: self._location_domain())
+    # location = fields.Many2one('res.partner', 'res_partner_sd_mom_moms_location', domain="[('company_type', '=', 'company')]")
+    location = fields.Many2one('res.partner', domain=lambda self: self._location_domain())
+    project_id = fields.Many2one('project.project', required=True, tracking=True)
     name = fields.Char(required=True, translate=True, tracking=True)
     mom_no = fields.Char(required=True,  tracking=True)
     mom_date = fields.Date(required=True, tracking=True,
                              default=lambda self: datetime.now(pytz.timezone(self.env.context.get('tz', 'Asia/Tehran'))))
     active = fields.Boolean(default=True)
-    location = fields.Char()
+    # location = fields.Char()
     description = fields.Html()
     agenda = fields.Html()
     description_2 = fields.Html()
+    def _list_title(self):
+        return [('client', 'Client'),
+                ('consultant', 'Consultant'),
+                ('contractor', 'Contractor'),
+                ('internal', 'Internal'),
+                ('others', 'Others')]
+
+    list_title_1 = fields.Selection(selection='_list_title', default='client')
+    list_title_2 = fields.Selection(selection='_list_title', default='consultant')
+    list_title_3 = fields.Selection(selection='_list_title', default='contractor')
+
     list_1 = fields.Html()
     list_2 = fields.Html()
+    list_3 = fields.Html()
     state = fields.Selection([('ongoing', 'Ongoing'),
                               ('stopped', 'Stopped'),
                               ('canceled', 'Canceled'),
@@ -101,7 +127,7 @@ class SdMomTask(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('mom_id'):
-            vals['project_id'] = self.env['project.project'].sudo().search([('name', '=', 'MOM')]).id
+            # vals['project_id'] = self.env['project.project'].sudo().search([('name', '=', 'MOM')]).id
             vals['stage_id'] = self.sudo().stage_find(vals['project_id'], [
                     ('fold', '=', False), ('is_closed', '=', False)])
         return super().create(vals)

@@ -32,6 +32,36 @@
             </div>
         </template>
 
+        <template id="page_1">
+            <div class="page">
+                <div class="row text-center " style="height: 150px;">
+                    <div class="col-3 mom_vertical_center">
+                        <t t-if="o_data.logo_block_1" t-foreach="o_data.logo_block_1" t-as="logo_block">
+                            <div>
+                                <img t-attf-src="/web/image/res.partner/{{logo_block}}/image_128/" alt="Logo"/>
+<!--                                <img t-attf-src="/web/image/res.partner/52/image_128/" alt="Logo"/>-->
+                            </div>
+
+                        </t>
+                    </div>
+                    <div class="col-6 mom_vertical_center">
+                        <div t-esc="o_data.project_name"></div>
+
+                    </div>
+                    <div class="col-3 mom_vertical_center">
+                        <t t-if="o_data.logo_block_2" t-foreach="o_data.logo_block_2" t-as="logo_block">
+                            <div>
+                                <img t-attf-src="/web/image/res.partner/{{logo_block}}/image_128/" alt="Logo"/>
+<!--                                <img t-attf-src="/web/image/res.partner/52/image_128/" alt="Logo"/>-->
+                            </div>
+
+                        </t>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+
         <template id="body">
             <div t-if="o_data.is_attendees" class="my-3 mx-0">
                 <div class="col font-weight-bold h5" >Attendees</div>
@@ -91,6 +121,7 @@
             <div class="container">
                 <div class="page">
                     <t t-call="sd_mom.data_header" t-lang="lang"/>
+                    <t t-call="sd_mom.page_1" t-lang="lang"/>
                     <t t-call="sd_mom.body" t-lang="lang"/>
                     <t t-call="sd_mom.footer" t-lang="lang"/>
                 </div>

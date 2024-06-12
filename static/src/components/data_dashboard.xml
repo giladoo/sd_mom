@@ -12,6 +12,10 @@
                         <SdMomDataCards onClick="()=>viewMoms('ongoing')" name="'Ongoing MOMs'" status="state.ongoing_mom.value"/>
 <!--                        <SdMomDataCards onClick="()=>viewOngoingMoms(0)"   status="state.this_day_requests_count.status" value="state.this_day_requests_count.value"  />-->
                     </div>
+                    <div class="row">
+
+                        <SdMomReportCards onClick="()=>viewSelectedMom()" name="'Ongoing MOMs'" status="state.ongoing_mom.value"/>
+                    </div>
                 </div>
             </div>
         </t>

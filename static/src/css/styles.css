@@ -13,3 +13,9 @@
 .mom_table tfoot tr th{
     border: 1px dashed #727272 !important;
 }
+
+.mom_vertical_center{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
+}
