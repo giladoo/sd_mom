@@ -32,6 +32,8 @@ class SdMomMoms(models.Model):
         # stage_id = self.sudo().stage_find(project_id.id, [('fold', '=', False), ('is_closed', '=', False)])
         print(f'============  \n {project_id}  \n {self.env.context}\n')
         return project_id
+
+    active = fields.Boolean(default=True)
     logo_1 = fields.Many2many('res.partner', 'res_partner_sd_mom_moms_logo_1', domain=lambda self: self._location_domain())
     logo_2 = fields.Many2many('res.partner', 'res_partner_sd_mom_moms_logo_2', domain=lambda self: self._location_domain())
     # location = fields.Many2one('res.partner', 'res_partner_sd_mom_moms_location', domain="[('company_type', '=', 'company')]")
@@ -48,7 +50,6 @@ class SdMomMoms(models.Model):
     end_time_minute = fields.Selection(selection='_minute', default='0')
     assistant = fields.Char()
     page_count = fields.Integer(default=2)
-    active = fields.Boolean(default=True)
     # location = fields.Char()
     description = fields.Html()
     agenda = fields.Html()
@@ -80,15 +81,21 @@ class SdMomMoms(models.Model):
         default=False, recursive=True, store=True, readonly=False,
         index=True, tracking=True, check_company=True, change_default=True)
     # project_id = fields.Many2one('project.project', default=lambda self: self._default_project_id())
-    tasks = fields.One2many('project.task', 'mom_id', string="Task Activities",  tracking=True,)
+    tasks = fields.One2many('project.task', 'mom_id', string="Task Activities",
+                            tracking=True, context={'active_test': False})
+
 
 
     def write(self, vals):
+        if 'active' in vals.keys():
+            if vals.get('active'):
+                tasks = self.tasks.search([('mom_id', '=', self.id), ('active', '=', False),])
+                for task in tasks:
+                    task.write({'active': True})
+            else:
+                vals['tasks'] = list([[1, rec.id, {'active': False}] for rec in self.tasks])
 
-        if vals.get('tasks'):
-            # print(f'----------------------------------------\n{self.project_id.id}\n'
-            #       f'{vals.get("tasks")}')
-            # tasks_sequence = list([rec[1] for rec in vals.get('tasks') if rec[0] and rec[2] and rec[2].get('sequence')])
+        elif vals.get('tasks'):
             new_tasks = []
             new_task = []
             line_no = 1
@@ -145,15 +152,11 @@ class SdMomMoms(models.Model):
         return super().create(vals)
 
 
-    # @api.onchange('tasks')
-    # def tasks_changed(self):
-    #     print(f'=========>>>> tasks_changed, self: {self}')
-        # self.write({'tasks': self.tasks})
-        # return {'type': 'ir.actions.client', 'tag': 'reload'}
+    def unlink(self):
+        if self.tasks:
+            raise ValidationError(_('This MOM has task(s). It is better to archive it.'))
 
-    # def write(self, vals):
-    #     print(f'=========>>>> write, vals: {vals}')
-    #     return super().write(vals)
+        return super().unlink()
 
 class SdMomTask(models.Model):
     _inherit = 'project.task'

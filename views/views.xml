@@ -30,12 +30,14 @@
                     <header>
                         <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
                     </header>
+                    <field name="active" invisible="1"/>
                     <field name="company_id" invisible="1"/>
                     <field name="mom_id" invisible="1"/>
                     <div class="border col-12 col-md-10 shadow mx-auto  p-4 my-4 rounded" style="max-width: 1100px;">
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
 
                         <!--                HEADER -->
-                        <div class="row mx-0  border border-dark rounded " style="height: 100px;">
+                        <div class="row mx-0 mt-3  border border-info shadow rounded " style="height: 100px;">
                             <div class="col-3 align-content-around">
                                 <field name="logo_1" class="col-12" widget="many2many_tags"/>
                             </div>
@@ -49,7 +51,7 @@
                         </div>
 
                         <!--                MEETING SPECIFICATION-->
-                        <div class="row mx-0 my-4 py-2 border border-dark rounded">
+                        <div class="row mx-0 my-5 py-2 border border-info shadow rounded">
                             <div class=" text-center" style="width: 30px;">
                                 <div class="py-3">
                                 </div>
@@ -188,7 +190,7 @@
                             </div>
                         </div>
 
-                        <div class="row mx-0 border border-dark rounded"
+                        <div class="row mx-0 mb-4 border border-info shadow rounded"
                              style="min-height: 200px; max-height: 620px; overflow: hidden;">
                             <div class="border-right border-dark  text-center" style="width: 30px;">
                                 <div class="py-5"> </div>
@@ -227,9 +229,10 @@
 
                     </div>
                     <div class="border shadow rounded p-4 mx-auto my-5" style="max-width: 1100px;">
-                        <field name="tasks" widget="one2many" class="mom_task_table border border-dark rounded">
+                        <field name="tasks" widget="one2many" class="mom_task_table border border-primary shadow rounded" style="border-width: 2px !important;" >
                             <tree editable="bottom" class="p-1" decoration-success="is_closed"
                                   decoration-bf="not is_closed">
+                                <field name="active" invisible="1"/>
                                 <field name="company_id" invisible="1"/>
                                 <field name="project_id" invisible="1"/>
                                 <field name="stage_id" invisible="1"/>
@@ -274,8 +277,12 @@
                 <search string="Dealers">
                     <field name="name"/>
                     <field name="project_id"/>
+                    <field name="active"/>
+                    <filter name="all" string="All" domain="['|', ('active', '=', False),('active', '=', True),]"/>
                     <filter name="live" string="Live" domain="[('state', '!=', 'done')]"/>
                     <filter name="project" string="Project" context="{'group_by':'project_id'}"/>
+                    <separator/>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
                 </search>
             </field>
         </record>
