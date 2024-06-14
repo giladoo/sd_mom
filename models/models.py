@@ -13,7 +13,7 @@ class SdMomMoms(models.Model):
 
 
     def _location_domain(self):
-        domain = [('id', '==', False)]
+        domain = [('id', 'in', [])]
         partners = self.env['res.partner'].search([])
         partners = list([rec.id for rec in partners if rec.company_type == 'company'])
         if partners:
