@@ -9,7 +9,7 @@
             <xpath expr="//div[hasclass('oe_title')]" position="after">
                 <group>
                     <field name="mom_id" calss="" attrs="{'invisible': [('mom_id', '=', False)], 'readonly': 1}"/>
-                    <field name="mom_detail" calss="" attrs="{'invisible': [('mom_id', '=', False)], 'readonly': 1}"/>
+                    <field name="mom_detail" widget="html" calss="text-wrap" attrs="{'invisible': [('mom_id', '=', False)], 'readonly': 1}"/>
                 </group>
 
             </xpath>
