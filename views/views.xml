@@ -237,7 +237,7 @@
                                 <field name="mom_line_no" readonly="1" width="30px" class="text-center"/>
                                 <!--                                <field name="id" width="20px"/>-->
                                 <field name="name" invisible="1"/>
-                                <field name="mom_detail" width="600px" string="Actions and Decisions"/>
+                                <field name="mom_detail" width="600px" string="Actions and Decisions" class="text-wrap" widget="html"/>
                                 <field name="mom_responsible" class="text-center" string="Responsible"/>
 
                                 <!--                                <field name="user_ids" widget="many2many_avatar_user"/>-->
