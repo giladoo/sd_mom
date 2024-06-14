@@ -6,7 +6,7 @@
                     <div class="h1 text-center mt-3 mx-auto" t-esc="state.title.name">
                         aa2
                     </div>
-                    <div class="row">
+                    <div class="row mt-5">
                         <SdMomDataCards name="state.username.name" status="state.username.status"/>
                         <SdMomDataCards onClick="()=>viewMoms('all')" name="'All MOMs'" status="state.all_mom.value"/>
                         <SdMomDataCards onClick="()=>viewMoms('ongoing')" name="'Ongoing MOMs'" status="state.ongoing_mom.value"/>
