@@ -41,3 +41,12 @@
       justify-content: center;
   align-items: center;
 }
+
+.mom_logo_1{
+    max-width: 120px !important;
+    height: 90px !important;
+}
+.mom_logo_2{
+    max-width: 80px !important;
+    height: 70px !important;
+}

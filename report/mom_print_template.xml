@@ -49,7 +49,7 @@
                             <t t-if="o_data.logo_block_1" t-foreach="o_data.logo_block_1[:2]" t-as="logo_block">
                                 <div t-att-class="'col-12' if len(o_data.logo_block_1[:2]) == 1 else 'col-6' ">
                                     <img t-attf-src="/web/image/res.partner/{{logo_block}}/image_128/" alt="Logo"
-                                         style="max-width: 80px; height: 70px;"/>
+                                         t-att-class="'mom_logo_1' if len(o_data.logo_block_1[:2]) == 1 else 'mom_logo_2' "/>
                                 </div>
                             </t>
                         </div>
@@ -57,7 +57,7 @@
                             <t t-if="o_data.logo_block_1" t-foreach="o_data.logo_block_1[2:4]" t-as="logo_block">
                                 <div t-att-class="'col-12' if len(o_data.logo_block_1[2:4]) == 1 else 'col-6' ">
                                     <img t-attf-src="/web/image/res.partner/{{logo_block}}/image_128/" alt="Logo"
-                                         style="max-width: 80px; height: 70px;"/>
+                                         class="mom_logo_2"/>
                                 </div>
                             </t>
                         </div>
@@ -74,7 +74,7 @@
                             <t t-if="o_data.logo_block_2" t-foreach="o_data.logo_block_2[:2]" t-as="logo_block">
                                 <div t-att-class="'col-12' if len(o_data.logo_block_2[:2]) == 1 else 'col-6' ">
                                     <img t-attf-src="/web/image/res.partner/{{logo_block}}/image_128/" alt="Logo"
-                                         style="max-width: 80px; height: 70px;"/>
+                                         t-att-class="'mom_logo_1' if len(o_data.logo_block_2[:2]) == 1 else 'mom_logo_2' "/>
                                 </div>
                             </t>
                         </div>
@@ -82,11 +82,12 @@
                             <t t-if="o_data.logo_block_2" t-foreach="o_data.logo_block_2[2:4]" t-as="logo_block">
                                 <div t-att-class="'col-12' if len(o_data.logo_block_2[2:4]) == 1 else 'col-6' ">
                                     <img t-attf-src="/web/image/res.partner/{{logo_block}}/image_128/" alt="Logo"
-                                         style="max-width: 80px; height: 70px;"/>
+                                         class="mom_logo_2"/>
                                 </div>
                             </t>
                         </div>
                     </div>
+
                 </div>
 
 
@@ -238,7 +239,7 @@
 
                         </div>
                         <div class="col-11">
-                            <div class="row border-bottom border-dark mx-0 py-2 text-center">
+                            <div class="row border-bottom border-dark mx-0 py-2 small font-weight-bold text-center">
                                 <div class="col-4">
                                     <span t-if="o_data.is_list_1" t-esc="o_data.list_title_1"></span>
                                 </div>

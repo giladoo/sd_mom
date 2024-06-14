@@ -204,19 +204,19 @@
                             </div>
                             <div class="col">
                                 <div class="row pb-5 " style="min-height: 200px;">
-                                    <div class="col-4">
-                                        <!--                                <div class="o_form_label text-center">List 1</div>-->
-                                        <field name="list_title_1" class="text-center"/>
+                                    <div class="col-4 my-3">
+                                            <field name="list_title_1" class="text-center col-12 " widget="many2one"/>
+                                        <div class="border-top border-dark my-3 px-2"></div>
                                         <field name="list_1" class="border rounded h-100 " widget="html" nolable="1"/>
                                     </div>
-                                    <div class="col-4">
-                                        <!--                                <div class="o_form_label text-center">List 2</div>-->
-                                        <field name="list_title_2" class="text-center"/>
+                                    <div class="col-4 my-3">
+                                        <field name="list_title_2" class="text-center col-12" widget="many2one"/>
+                                        <div class="border-top border-dark my-3 px-2"></div>
                                         <field name="list_2" class="border rounded h-100 " widget="html" nolable="1"/>
                                     </div>
-                                    <div class="col-4">
-                                        <!--                                <div class="o_form_label text-center">List 2</div>-->
-                                        <field name="list_title_3" class="text-center"/>
+                                    <div class="col-4 my-3">
+                                        <field name="list_title_3" class="text-center col-12" widget="many2one"/>
+                                        <div class="border-top border-dark my-3 px-2"></div>
                                         <field name="list_3" class="border rounded h-100 " widget="html" nolable="1"/>
                                     </div>
                                 </div>

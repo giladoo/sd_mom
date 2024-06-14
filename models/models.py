@@ -13,7 +13,7 @@ class SdMomMoms(models.Model):
 
 
     def _location_domain(self):
-        domain = []
+        domain = [('1', '!=', 1)]
         partners = self.env['res.partner'].search([])
         partners = list([rec.id for rec in partners if rec.company_type == 'company'])
         if partners:
@@ -60,9 +60,12 @@ class SdMomMoms(models.Model):
                 ('internal', 'Internal'),
                 ('others', 'Others')]
 
-    list_title_1 = fields.Selection(selection='_list_title', default='client')
-    list_title_2 = fields.Selection(selection='_list_title', default='consultant')
-    list_title_3 = fields.Selection(selection='_list_title', default='contractor')
+    # list_title_1 = fields.Selection(selection='_list_title', default='client')
+    # list_title_2 = fields.Selection(selection='_list_title', default='consultant')
+    # list_title_3 = fields.Selection(selection='_list_title', default='contractor')
+    list_title_1 = fields.Many2one('res.partner', 'res_partner_sd_mom_moms_list_title_1', domain=lambda self: self._location_domain())
+    list_title_2 = fields.Many2one('res.partner', 'res_partner_sd_mom_moms_list_title_2', domain=lambda self: self._location_domain())
+    list_title_3 = fields.Many2one('res.partner', 'res_partner_sd_mom_moms_list_title_3', domain=lambda self: self._location_domain())
 
     list_1 = fields.Html()
     list_2 = fields.Html()
