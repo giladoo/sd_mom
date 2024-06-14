@@ -35,7 +35,7 @@ class SdMomMoms(models.Model):
     logo_1 = fields.Many2many('res.partner', 'res_partner_sd_mom_moms_logo_1', domain=lambda self: self._location_domain())
     logo_2 = fields.Many2many('res.partner', 'res_partner_sd_mom_moms_logo_2', domain=lambda self: self._location_domain())
     # location = fields.Many2one('res.partner', 'res_partner_sd_mom_moms_location', domain="[('company_type', '=', 'company')]")
-    location = fields.Many2one('res.partner', domain=lambda self: self._location_domain())
+    location = fields.Many2one('res.partner', 'res_partner_sd_mom_moms_location', domain=lambda self: self._location_domain())
     location_des = fields.Char()
     project_id = fields.Many2one('project.project', required=True, tracking=True)
     name = fields.Char(required=True, translate=True, tracking=True)
