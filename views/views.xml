@@ -7,7 +7,8 @@
             <field name="name">sd_mom List</field>
             <field name="model">sd_mom.moms</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree expand="1">
+                    <field name="project_id"/>
                     <field name="mom_no"/>
                     <field name="mom_date"/>
                     <field name="name"/>
@@ -34,140 +35,218 @@
                     <div class="border col-12 col-md-10 shadow mx-auto  p-4 my-4 rounded" style="max-width: 1100px;">
 
                         <!--                HEADER -->
-                        <div class="row" style="height: 100px;">
-                            <div class="col-3">
+                        <div class="row mx-0  border border-dark rounded " style="height: 100px;">
+                            <div class="col-3 align-content-around">
                                 <field name="logo_1" class="col-12" widget="many2many_tags"/>
                             </div>
-                            <div class="col-6">
-
-                                <field name="project_id" class="col-12"/>
+                            <div class="col-6 align-content-around border-left border-right border-dark text-center">
+                                <div class="my-2">فرم صورتجلسه</div>
+                                <field name="project_id" class="col-12" placeholder="Select a project"/>
                             </div>
-                            <div class="col-3">
+                            <div class="col-3 align-content-around">
                                 <field name="logo_2" class="col-12" widget="many2many_tags"/>
                             </div>
                         </div>
 
                         <!--                MEETING SPECIFICATION-->
-                        <div class="row">
-                            <div class=" border text-center" style="width: 30px;">
+                        <div class="row mx-0 my-4 py-2 border border-dark rounded">
+                            <div class=" text-center" style="width: 30px;">
                                 <div class="py-3">
-
                                 </div>
-                                <div class="text-center" style="writing-mode:vertical-rl;">
-                                    text 1
+                                <div class="text-nowrap small" invisible="context.get('lang') != 'fa_IR'"
+                                     style=" -webkit-transform: rotate(-90deg);">
+                                    Meeting Specification
+                                </div>
+                                <div class="text-nowrap small" invisible="context.get('lang') == 'fa_IR'"
+                                     style=" -webkit-transform: rotate(90deg);">
+                                    Meeting Specification
                                 </div>
 
                             </div>
-                            <div class="col-8 border border-info">
-                                <div class="col-12">
-                                    <div class="o_form_label">Subject:</div>
-                                    <field name="name"/>
-                                </div>
-                                <div class="col-12">
-                                    <div class="o_form_label">Location:</div>
-<!--                                    <field name="location" domain="[('company_type', '=', 'company')]"/>-->
-                                    <field name="location" />
-                                </div>
-                            </div>
-                            <div class="col-3 border border-warning">
-                                <div class="row">
-                                    <div class="col-5">
-                                        Date:
-                                    </div>
-                                    <div class="col-7">
-                                        2024
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        Date:
-                                    </div>
-                                    <div class="col-7">
-                                        2024
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        Date:
-                                    </div>
-                                    <div class="col-7">
-                                        2024
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        Date:
-                                    </div>
-                                    <div class="col-7">
-                                        2024
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <div class="col-8 px-1 border-left border-right border-dark">
+                                <div class="col-11 py-1 h-50">
+                                    <div class="o_form_label mb-2">Subject:</div>
+                                    <div class="mx-2">
+                                        <field name="name" placeholder="" class=""/>
 
-                        <div class="row">
-                            <div class="col-9">
-                                <div class="o_form_label">Subject:</div>
-                                <field name="name"/>
+                                    </div>
+                                </div>
+                                <div class="border-top border-dark mx-1"></div>
+                                <div class="col-12 py-1 h-50">
+                                    <div class="o_form_label mb-2">Location:</div>
+                                    <div class="row mx-2 ">
+                                        <div class="mx-1">
+                                            <field name="location" options="{'no_create_edit': 1, 'no_open': 1 }"/>
+                                        </div>
+                                        <div class="col-8 mx-2">
+                                            <field name="location_des" placeholder="E.g. Room 33"/>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-3">
                                 <div class="row">
-                                    <div class="col o_form_label">MOM No</div>
-                                    <div class="col">
-                                        <field name="mom_no"/>
+                                    <div class="col-5">
+
+                                        <span class="o_form_label">
+                                            Date:
+                                        </span>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col o_form_label">MOM Date</div>
-                                    <div class="col">
+                                    <div class="col-7 text-center">
                                         <field name="mom_date"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="border px-4 my-3"></div>
+                                <div class="col mb-1 border-top border-dark"></div>
+                                <div class="row">
+                                    <div class="col-5">
 
-                        <div class="o_form_label">Attendees</div>
-                        <div class="row pb-5" style="min-height: 100px;">
-                            <div class="col-4">
-                                <!--                                <div class="o_form_label text-center">List 1</div>-->
-                                <field name="list_title_1"/>
-                                <field name="list_1" class="border rounded h-100" widget="html" nolable="1"/>
-                            </div>
-                            <div class="col-4">
-                                <!--                                <div class="o_form_label text-center">List 2</div>-->
-                                <field name="list_title_2"/>
-                                <field name="list_2" class="border rounded h-100" widget="html" nolable="1"/>
-                            </div>
-                            <div class="col-4">
-                                <!--                                <div class="o_form_label text-center">List 2</div>-->
-                                <field name="list_title_3"/>
-                                <field name="list_3" class="border rounded h-100" widget="html" nolable="1"/>
-                            </div>
-                        </div>
-                        <div style="min-height: 100px;">
+                                        <span class="o_form_label">
+                                            Start Time:
+                                        </span>
+                                    </div>
+                                    <div class="col-7 ">
+                                        <div class="row mx-0 px-0" invisible="context.get('lang') != 'fa_IR'">
+                                            <div class="col-5 mx-1 px-0 text-right">
+                                                <field name="start_time_minute"/>
+                                            </div>
+                                            <div class="">
+                                                :
+                                            </div>
+                                            <div class="col-5 mx-1 px-0">
+                                                <field name="start_time_hour"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-0 px-0" invisible="context.get('lang') == 'fa_IR'">
+                                            <div class="col-5 mx-1 px-0 text-right">
+                                                <field name="start_time_hour"/>
+                                            </div>
+                                            <div class="">
+                                                :
+                                            </div>
+                                            <div class="col-5 mx-1 px-0">
+                                                <field name="start_time_minute"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col mb-1 border-top border-dark"></div>
+                                <div class="row">
+                                    <div class="col-5">
 
-                            <div class="o_form_label">Agenda</div>
-                            <field name="agenda" class="border rounded h-100" widget="html" nolable="1"/>
+                                        <span class="o_form_label">
+                                            End Time:
+                                        </span>
+                                    </div>
+                                    <div class="col-7 ">
+                                        <div class="row mx-0 px-0" invisible="context.get('lang') != 'fa_IR'">
+                                            <div class="col-5 mx-1 px-0 text-right">
+                                                <field name="end_time_minute"/>
+                                            </div>
+                                            <div class="">
+                                                :
+                                            </div>
+                                            <div class="col-5 mx-1 px-0">
+                                                <field name="end_time_hour"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-0 px-0" invisible="context.get('lang') == 'fa_IR'">
+                                            <div class="col-5 mx-1 px-0 text-right">
+                                                <field name="end_time_hour"/>
+                                            </div>
+                                            <div class="">
+                                                :
+                                            </div>
+                                            <div class="col-5 mx-1 px-0">
+                                                <field name="end_time_minute"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col mb-1 border-top border-dark"></div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="o_form_label">
+                                            Assistant:
+                                        </span>
+                                    </div>
+                                    <div class="col-7 text-center">
+                                        <field name="assistant"/>
+                                    </div>
+                                </div>
+                                <div class="col mb-1 border-top border-dark"></div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="o_form_label">
+                                            MOM No:
+                                        </span>
+                                    </div>
+                                    <div class="col-7 text-center">
+                                        <field name="mom_no"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="row mx-0 border border-dark rounded"
+                             style="min-height: 200px; max-height: 620px; overflow: hidden;">
+                            <div class="border-right border-dark  text-center" style="width: 30px;">
+                                <div class="py-5"> </div>
+
+                                <div class="text-nowrap small" invisible="context.get('lang') != 'fa_IR'"
+                                     style=" -webkit-transform: rotate(-90deg);">
+                                    Attendees
+                                </div>
+                                <div class="text-nowrap small" invisible="context.get('lang') == 'fa_IR'"
+                                     style=" -webkit-transform: rotate(90deg);">
+                                    Attendees
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row pb-5 " style="min-height: 200px;">
+                                    <div class="col-4">
+                                        <!--                                <div class="o_form_label text-center">List 1</div>-->
+                                        <field name="list_title_1" class="text-center"/>
+                                        <field name="list_1" class="border rounded h-100 " widget="html" nolable="1"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <!--                                <div class="o_form_label text-center">List 2</div>-->
+                                        <field name="list_title_2" class="text-center"/>
+                                        <field name="list_2" class="border rounded h-100 " widget="html" nolable="1"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <!--                                <div class="o_form_label text-center">List 2</div>-->
+                                        <field name="list_title_3" class="text-center"/>
+                                        <field name="list_3" class="border rounded h-100 " widget="html" nolable="1"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
                     </div>
-                    <div class="border shadow rounded p-4 mx-2 my-5">
-                        <field name="tasks" widget="one2many">
-                            <tree editable="bottom">
+                    <div class="border shadow rounded p-4 mx-auto my-5" style="max-width: 1100px;">
+                        <field name="tasks" widget="one2many" class="mom_task_table border border-dark rounded">
+                            <tree editable="bottom" class="p-1" decoration-success="is_closed"
+                                  decoration-bf="not is_closed">
                                 <field name="company_id" invisible="1"/>
                                 <field name="project_id" invisible="1"/>
+                                <field name="stage_id" invisible="1"/>
                                 <field name="sequence" widget="handle"/>
-                                <field name="mom_line_no" readonly="1" width="30px"/>
+                                <field name="mom_line_no" readonly="1" width="30px" class="text-center"/>
                                 <!--                                <field name="id" width="20px"/>-->
-                                <field name="name" width="200px"/>
-                                <field name="mom_detail" width="600px"/>
+                                <field name="name" invisible="1"/>
+                                <field name="mom_detail" width="600px" string="Actions and Decisions"/>
+                                <field name="mom_responsible" class="text-center" string="Responsible"/>
 
-                                <field name="user_ids" widget="many2many_avatar_user"/>
+                                <!--                                <field name="user_ids" widget="many2many_avatar_user"/>-->
                                 <!--                                <field name="activity_ids" widget="kanban_activity"/>-->
-                                <field name="date_deadline"/>
-                                <field name="stage_id" attrs="{'readonly': [('id', '=', False)]}"
-                                       widget="badge"
-                                       decoration-success="stage_id == 'Done'"/>
+                                <field name="date_deadline" class="text-center"/>
+                                <field name="is_closed" invisible="0" class="text-center"/>
+                                <!--                                <field name="stage_id" attrs="{'readonly': [('id', '=', False)]}"-->
+                                <!--                                       widget="badge"-->
+                                <!--                                       decoration-success="stage_id == 'Done'"/>-->
                                 <!--                                <field name="stage_id"/>-->
                                 <button name="action_open_task" type="object" title="View Task" string="View Task"
                                         class="btn btn-link pull-right"/>
@@ -194,7 +273,9 @@
             <field name="arch" type="xml">
                 <search string="Dealers">
                     <field name="name"/>
+                    <field name="project_id"/>
                     <filter name="live" string="Live" domain="[('state', '!=', 'done')]"/>
+                    <filter name="project" string="Project" context="{'group_by':'project_id'}"/>
                 </search>
             </field>
         </record>
@@ -207,7 +288,7 @@
             <field name="name">MOM</field>
             <field name="res_model">sd_mom.moms</field>
             <field name="view_mode">tree,form,pivot</field>
-            <field name="context">{'search_default_live': 1}</field>
+            <field name="context">{'search_default_project': 1,'search_default_live': 1,}</field>
         </record>
 
         <record model="ir.actions.client" id="action_data_dashboard">

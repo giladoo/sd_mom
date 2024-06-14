@@ -83,7 +83,7 @@ export class SdMomDataDashboard extends Component {
             type: "ir.actions.act_window",
             view_mode: "list",
             domain: domain,
-//            context: {'search_default_meter_no_group': 1},
+            context: {'search_default_project': 1,'search_default_live': 1},
             target: "current",
         });
     }
