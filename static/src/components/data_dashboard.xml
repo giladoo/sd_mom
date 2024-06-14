@@ -14,7 +14,7 @@
                     </div>
                     <div class="row">
 
-                        <SdMomReportCards onClick="()=>viewSelectedMom()" name="'Ongoing MOMs'" status="state.ongoing_mom.value"/>
+<!--                        <SdMomReportCards onClick="()=>viewSelectedMom()" name="'Ongoing MOMs'" status="state.ongoing_mom.value"/>-->
                     </div>
                 </div>
             </div>
